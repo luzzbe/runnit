@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { User, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { PageHeader } from '@/components/PageHeader'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
@@ -38,12 +39,9 @@ export function ProfilePage({ profile, onSave, onLoadDemo, onReset }: ProfilePag
   }
 
   return (
-    <div className="px-4 pt-6 pb-4 max-w-lg mx-auto">
-      <div className="flex items-center gap-2 mb-6">
-        <User size={20} className="text-slate-400" />
-        <h1 className="text-xl font-bold text-slate-900">Mon profil</h1>
-      </div>
-
+    <>
+      <PageHeader icon={<User size={18} />} title="Mon profil" />
+      <div className="px-4 pt-4 pb-6 max-w-lg mx-auto">
       <form onSubmit={handleSave} className="flex flex-col gap-5">
         <div>
           <Label htmlFor="firstName">Prénom</Label>
@@ -145,6 +143,7 @@ export function ProfilePage({ profile, onSave, onLoadDemo, onReset }: ProfilePag
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

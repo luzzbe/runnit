@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { TrendingUp, TrendingDown, Minus, Plus, Zap, Target, Calendar } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { PageHeader } from '@/components/PageHeader'
 import { formatPace, formatDuration } from '@/lib/stats/calculations'
 import type { Last4WeeksAvg } from '@/lib/stats/calculations'
 import type { WeeklyStats, ProgressInsight, UserProfile, Run } from '@/types'
@@ -89,12 +90,20 @@ export function DashboardPage({ profile, currentWeek, last4, summary, insights, 
     hour < 12 ? 'Bonjour' : hour < 18 ? 'Bon après-midi' : 'Bonsoir'
 
   return (
-    <div className="px-4 pt-6 pb-4 max-w-lg mx-auto">
-      <div className="mb-6">
-        <p className="text-slate-500 text-sm">{greeting},</p>
-        <h1 className="text-2xl font-bold text-slate-900">{profile.firstName} 👋</h1>
-      </div>
-
+    <>
+      <PageHeader
+        subtitle={`${greeting},`}
+        title={`${profile.firstName} 👋`}
+        actions={
+          <button
+            onClick={() => navigate('/ajouter')}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+          >
+            <Plus size={18} />
+          </button>
+        }
+      />
+      <div className="px-4 pt-4 pb-6 max-w-lg mx-auto">
       {/* Objectif */}
       <div className="bg-primary-600 rounded-2xl p-4 mb-5 text-white">
         <div className="flex items-center gap-2 mb-1">
@@ -187,6 +196,7 @@ export function DashboardPage({ profile, currentWeek, last4, summary, insights, 
           Ajouter ma première sortie de la semaine
         </Button>
       )}
-    </div>
+      </div>
+    </>
   )
 }

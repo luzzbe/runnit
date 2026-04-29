@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Activity } from 'lucide-react'
+import { Activity } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { PageHeader } from '@/components/PageHeader'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
@@ -101,16 +102,12 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
   }
 
   return (
-    <div className="px-4 pt-4 pb-4 max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={handleBack} className="p-2 -ml-2 text-slate-500 hover:text-slate-700">
-          <ArrowLeft size={20} />
-        </button>
-        <h1 className="text-xl font-bold text-slate-900">
-          {isEditing ? 'Modifier la sortie' : 'Nouvelle sortie'}
-        </h1>
-      </div>
-
+    <>
+      <PageHeader
+        back={handleBack}
+        title={isEditing ? 'Modifier la sortie' : 'Nouvelle sortie'}
+      />
+      <div className="px-4 pt-4 pb-6 max-w-lg mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
           <Label htmlFor="date">Date</Label>
@@ -225,6 +222,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
           {isEditing ? 'Enregistrer les modifications' : 'Enregistrer la sortie'}
         </Button>
       </form>
-    </div>
+      </div>
+    </>
   )
 }

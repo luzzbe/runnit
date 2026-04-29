@@ -12,7 +12,7 @@ const links = [
 
 export function Navigation() {
   return (
-    <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 safe-area-bottom z-50">
+    <nav className="flex-none bg-white border-t border-slate-200 safe-area-bottom z-10">
       <div className="flex items-stretch h-16">
         {links.map(({ to, icon: Icon, label }) => (
           <NavLink
