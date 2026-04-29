@@ -1,9 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#6366f1"/>
-  <circle cx="320" cy="130" r="40" fill="white"/>
-  <path d="M180 230 L240 200 L290 240 L340 180 L380 220" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M200 300 L260 270 L300 320 L350 270" stroke="rgba(255,255,255,0.6)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="200" cy="300" r="12" fill="white"/>
-  <path d="M200 300 L220 360 L190 400 M220 360 L250 400" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M200 300 L180 340 L160 320" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect width="512" height="512" fill="#6366f1"/>
+  <g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Head -->
+    <circle cx="280" cy="98" r="46" fill="white" stroke="none"/>
+    <!-- Torso (leaning forward) -->
+    <line x1="270" y1="144" x2="245" y2="278" stroke-width="36"/>
+    <!-- Front arm bent down-forward -->
+    <polyline points="265,178 195,225 168,300" stroke-width="30"/>
+    <!-- Back arm swept up-back -->
+    <polyline points="265,178 330,200 368,148" stroke-width="30"/>
+    <!-- Front leg: knee raised (thigh up, shin angled down-forward) -->
+    <polyline points="245,278 200,358 238,432" stroke-width="32"/>
+    <!-- Back leg: heel kicked up behind -->
+    <polyline points="245,278 295,358 340,300" stroke-width="32"/>
+  </g>
 </svg>
