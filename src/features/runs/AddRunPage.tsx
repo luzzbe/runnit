@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/PageHeader'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
+import { DateInput } from '@/components/DateInput'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { calculatePace, formatPace } from '@/lib/stats/calculations'
@@ -110,13 +111,11 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
       <div className="px-4 pt-4 pb-6 max-w-lg mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <Label htmlFor="date">Date</Label>
-          <Input
-            id="date"
-            type="date"
+          <Label>Date</Label>
+          <DateInput
             value={date}
             max={todayISO()}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={setDate}
             required
           />
         </div>
