@@ -40,7 +40,11 @@
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  .safe-area-bottom-offset {
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .safe-area-content-bottom {
-    padding-bottom: 4rem;
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
   }
 }
