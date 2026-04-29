@@ -32,29 +32,8 @@
 
 @layer utilities {
   .app-shell {
-    height: 100vh;
-    min-height: 100vh;
-  }
-
-  @supports (height: 100dvh) {
-    .app-shell {
-      height: 100dvh;
-      min-height: 100dvh;
-    }
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    html,
-    body,
-    #root {
-      height: -webkit-fill-available;
-      min-height: -webkit-fill-available;
-    }
-
-    .app-shell {
-      height: -webkit-fill-available;
-      min-height: -webkit-fill-available;
-    }
+    height: auto;
+    min-height: 0;
   }
 
   .safe-area-bottom {
