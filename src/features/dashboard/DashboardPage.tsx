@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { formatPace, formatDuration } from '@/lib/stats/calculations'
 import type { Last4WeeksAvg } from '@/lib/stats/calculations'
-import type { WeeklyStats, ProgressInsight, UserProfile } from '@/types'
+import type { WeeklyStats, ProgressInsight, UserProfile, Run } from '@/types'
+import { PaceChart } from './PaceChart'
 
 const GOAL_LABELS: Record<UserProfile['goal'], string> = {
   run_30min: 'Courir 30 min sans s\'arrêter',
@@ -68,9 +69,10 @@ interface DashboardPageProps {
   last4: Last4WeeksAvg
   summary: string
   insights: ProgressInsight[]
+  runs: Run[]
 }
 
-export function DashboardPage({ profile, currentWeek, last4, summary, insights }: DashboardPageProps) {
+export function DashboardPage({ profile, currentWeek, last4, summary, insights, runs }: DashboardPageProps) {
   const navigate = useNavigate()
 
   const distanceTrend =
@@ -136,6 +138,9 @@ export function DashboardPage({ profile, currentWeek, last4, summary, insights }
           value={currentWeek.avgPace > 0 ? `${formatPace(currentWeek.avgPace)} /km` : '--'}
         />
       </div>
+
+      {/* Graphique allure */}
+      <PaceChart runs={runs} />
 
       {/* Ressenti */}
       {currentWeek.avgFeeling > 0 && (

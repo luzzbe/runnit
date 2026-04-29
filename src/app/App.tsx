@@ -59,6 +59,7 @@ export default function App() {
                 last4={last4}
                 summary={summary}
                 insights={insights}
+                runs={runs}
               />
             }
           />
