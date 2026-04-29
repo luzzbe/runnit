@@ -190,9 +190,9 @@ export function generateWeeklySummary(
     }
   }
 
-  if (currentWeek.avgFeeling >= 4) {
+  if (currentWeek.avgFeeling > 0 && currentWeek.avgFeeling <= 2) {
     parts.push(`Ton ressenti est excellent, tu vas clairement dans la bonne direction.`)
-  } else if (currentWeek.avgFeeling >= 3) {
+  } else if (currentWeek.avgFeeling <= 3) {
     parts.push(`Ton ressenti est bon. Continue sur cette lancée.`)
   } else if (currentWeek.avgFeeling > 0) {
     parts.push(`Les jambes sont un peu lourdes cette semaine — écoute ton corps.`)
@@ -237,7 +237,7 @@ export function detectProgressInsights(
     const recentPace = recentRuns.reduce((s, r) => s + r.pace, 0) / recentRuns.length
     const olderPace = olderRuns.reduce((s, r) => s + r.pace, 0) / olderRuns.length
 
-    if (recentFeel > olderFeel + 0.3 && Math.abs(recentPace - olderPace) < 0.5) {
+    if (recentFeel < olderFeel - 0.3 && Math.abs(recentPace - olderPace) < 0.5) {
       insights.push({
         type: 'efficiency',
         message: `Ton ressenti s'améliore à allure équivalente — tu deviens plus efficace.`,

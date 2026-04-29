@@ -27,20 +27,19 @@ function RatingButtons({
   labels: string[]
 }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {[1, 2, 3, 4, 5].map((n) => (
         <button
           key={n}
           type="button"
           onClick={() => onChange(n)}
-          className={`flex-1 py-2 rounded-xl text-sm font-medium transition-colors ${
+          className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors leading-tight ${
             value === n
               ? 'bg-primary-600 text-white'
               : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
           }`}
-          title={labels[n - 1]}
         >
-          {n}
+          {labels[n - 1]}
         </button>
       ))}
     </div>
@@ -194,16 +193,16 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
         )}
 
         <div>
-          <Label>Ressenti (1 = difficile · 5 = super)</Label>
+          <Label>Ressenti</Label>
           <RatingButtons
             value={feeling}
             onChange={setFeeling}
-            labels={['Difficile', 'Moyen', 'Correct', 'Bien', 'Super']}
+            labels={['Super', 'Bien', 'Correct', 'Moyen', 'Difficile']}
           />
         </div>
 
         <div>
-          <Label>Fatigue (1 = frais · 5 = épuisé)</Label>
+          <Label>Fatigue</Label>
           <RatingButtons
             value={fatigue}
             onChange={setFatigue}
