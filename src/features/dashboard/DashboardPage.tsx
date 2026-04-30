@@ -56,7 +56,7 @@ function FeelingDots({ value }: { value: number }) {
       {[1, 2, 3, 4, 5].map((i) => (
         <div
           key={i}
-          className={`w-2 h-2 rounded-full ${i <= Math.round(value) ? 'bg-emerald-400' : 'bg-slate-200'}`}
+          className={`w-2 h-2 rounded-full ${i <= 6 - Math.round(value) ? 'bg-emerald-400' : 'bg-slate-200'}`}
         />
       ))}
     </div>
