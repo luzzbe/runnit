@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Pencil, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
+import { Pencil, Trash2, ChevronDown, ChevronUp, Wind, Zap, Map, Flag } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -20,6 +20,20 @@ const TYPE_VARIANT: Record<Run['type'], 'default' | 'success' | 'warning' | 'inf
   interval: 'info',
   long_run: 'success',
   race: 'warning',
+}
+
+const TYPE_ICON: Record<Run['type'], React.ReactNode> = {
+  easy: <Wind size={18} />,
+  interval: <Zap size={18} />,
+  long_run: <Map size={18} />,
+  race: <Flag size={18} />,
+}
+
+const TYPE_COLORS: Record<Run['type'], string> = {
+  easy: 'bg-emerald-100 text-emerald-600',
+  interval: 'bg-blue-100 text-blue-600',
+  long_run: 'bg-purple-100 text-purple-600',
+  race: 'bg-amber-100 text-amber-600',
 }
 
 function FeelingEmoji({ value }: { value: number }) {
@@ -56,35 +70,43 @@ export function RunCard({ run, onUpdate, onDelete }: RunCardProps) {
   }
 
   return (
-    <Card>
+    <Card className="tap-press">
       <CardContent className="pt-4">
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start gap-3">
+          {/* Type icon column */}
+          <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 mt-0.5 ${TYPE_COLORS[run.type]}`}>
+            {TYPE_ICON[run.type]}
+          </div>
+
+          {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="text-sm font-semibold text-slate-700 capitalize">
-                {formatShortDate(run.date)}
-              </span>
-              <Badge variant={TYPE_VARIANT[run.type]}>{TYPE_LABELS[run.type]}</Badge>
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm font-semibold text-slate-700 capitalize">
+                  {formatShortDate(run.date)}
+                </span>
+                <Badge variant={TYPE_VARIANT[run.type]}>{TYPE_LABELS[run.type]}</Badge>
+              </div>
+              <button
+                onClick={() => setExpanded((v) => !v)}
+                className="p-1.5 text-slate-400 hover:text-slate-600 shrink-0"
+                aria-label="Voir détails"
+              >
+                {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
             </div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <span className="text-lg font-bold text-slate-900">
+
+            {/* Hero distance + secondary stats */}
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="text-2xl font-black text-slate-900">
                 {run.distanceKm.toFixed(1)} km
               </span>
-              <span className="text-slate-400">·</span>
-              <span className="text-sm text-slate-600">{formatDuration(run.durationMinutes)}</span>
-              <span className="text-slate-400">·</span>
-              <span className="text-sm text-slate-600">{formatPace(run.pace)} /km</span>
               <FeelingEmoji value={run.feeling} />
             </div>
-          </div>
-          <div className="flex items-center gap-1 shrink-0">
-            <button
-              onClick={() => setExpanded((v) => !v)}
-              className="p-1.5 text-slate-400 hover:text-slate-600"
-              aria-label="Voir détails"
-            >
-              {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </button>
+            <div className="grid grid-cols-2 gap-x-3 mt-0.5">
+              <span className="text-sm text-slate-500">{formatDuration(run.durationMinutes)}</span>
+              <span className="text-sm text-slate-500">{formatPace(run.pace)} /km</span>
+            </div>
           </div>
         </div>
 

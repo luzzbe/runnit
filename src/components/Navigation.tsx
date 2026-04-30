@@ -12,7 +12,7 @@ const links = [
 
 export function Navigation() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 bg-white border-t border-slate-200 px-2 pb-2 z-50">
+    <nav className="fixed inset-x-0 bottom-0 bg-white shadow-[0_-1px_0_0_rgb(0,0,0,0.06)] px-2 pb-2 z-50">
       <div className="flex items-stretch h-16">
         {links.map(({ to, icon: Icon, label }) => (
           <NavLink
@@ -21,13 +21,22 @@ export function Navigation() {
             end={to === '/'}
             className={({ isActive }) =>
               cn(
-                'flex flex-1 flex-col items-center justify-center gap-0.5 text-xs transition-colors',
-                isActive ? 'text-primary-600' : 'text-slate-400',
+                'flex flex-1 flex-col items-center justify-center tap-press transition-colors',
+                isActive ? 'text-primary-600' : 'text-slate-300',
               )
             }
           >
-            <Icon size={22} />
-            <span>{label}</span>
+            {({ isActive }) => (
+              <span
+                className={cn(
+                  'flex flex-col items-center gap-0.5',
+                  isActive ? 'bg-primary-50 rounded-2xl px-4 py-1.5' : 'px-4 py-1.5',
+                )}
+              >
+                <Icon size={24} />
+                <span className="text-[10px] font-medium">{label}</span>
+              </span>
+            )}
           </NavLink>
         ))}
       </div>

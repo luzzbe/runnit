@@ -10,19 +10,20 @@ interface RecordItemProps {
   title: string
   value: string
   sub?: string
+  colorClass?: string
 }
 
-function RecordItem({ icon, title, value, sub }: RecordItemProps) {
+function RecordItem({ icon, title, value, sub, colorClass = '' }: RecordItemProps) {
   return (
-    <Card>
+    <Card className={colorClass}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-widest text-slate-400 font-semibold">
           <span className="text-primary-500">{icon}</span>
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-2xl font-bold text-slate-900">{value}</p>
+        <p className="text-3xl font-black text-slate-900">{value}</p>
         {sub && <p className="text-xs text-slate-400 mt-1">{sub}</p>}
       </CardContent>
     </Card>
@@ -52,37 +53,43 @@ export function RecordsPage({ records }: RecordsPageProps) {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-3">
-            {records.bestPace && (
-              <RecordItem
-                icon={<Zap size={16} />}
-                title="Meilleure allure"
-                value={`${formatPace(records.bestPace.value)} /km`}
-                sub={formatDate(records.bestPace.date)}
-              />
-            )}
-            {records.longestDistance && (
-              <RecordItem
-                icon={<MapPin size={16} />}
-                title="Plus longue distance"
-                value={`${records.longestDistance.value.toFixed(1)} km`}
-                sub={formatDate(records.longestDistance.date)}
-              />
-            )}
-            {records.longestDuration && (
-              <RecordItem
-                icon={<Clock size={16} />}
-                title="Plus longue durée"
-                value={formatDuration(records.longestDuration.value)}
-                sub={formatDate(records.longestDuration.date)}
-              />
-            )}
+          <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3">
+              {records.bestPace && (
+                <RecordItem
+                  icon={<Zap size={16} />}
+                  title="Meilleure allure"
+                  value={`${formatPace(records.bestPace.value)} /km`}
+                  sub={formatDate(records.bestPace.date)}
+                  colorClass="bg-amber-50"
+                />
+              )}
+              {records.longestDistance && (
+                <RecordItem
+                  icon={<MapPin size={16} />}
+                  title="Plus longue distance"
+                  value={`${records.longestDistance.value.toFixed(1)} km`}
+                  sub={formatDate(records.longestDistance.date)}
+                  colorClass="bg-blue-50"
+                />
+              )}
+              {records.longestDuration && (
+                <RecordItem
+                  icon={<Clock size={16} />}
+                  title="Plus longue durée"
+                  value={formatDuration(records.longestDuration.value)}
+                  sub={formatDate(records.longestDuration.date)}
+                  colorClass="bg-purple-50"
+                />
+              )}
+            </div>
             {records.bestWeekVolume && (
               <RecordItem
                 icon={<BarChart2 size={16} />}
                 title="Meilleure semaine"
                 value={`${records.bestWeekVolume.value.toFixed(1)} km`}
                 sub={`semaine du ${formatDate(records.bestWeekVolume.weekStart)}`}
+                colorClass="bg-emerald-50"
               />
             )}
             {records.bestStreak && (
