@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Pencil, Trash2, ChevronDown, ChevronUp, Wind, Zap, Map, Flag } from 'lucide-react'
+import { Pencil, Trash2, ChevronDown, ChevronUp, Wind, Zap, Map, Flag, ArrowLeft } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -55,7 +55,18 @@ export function RunCard({ run, onUpdate, onDelete }: RunCardProps) {
     return (
       <Card>
         <CardContent className="pt-4">
+          <div className="flex items-center gap-2 mb-4">
+            <button
+              onClick={() => setEditing(false)}
+              className="p-1.5 text-slate-400 hover:text-slate-600"
+              aria-label="Annuler"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <span className="font-semibold text-slate-800">Modifier la sortie</span>
+          </div>
           <AddRunPage
+            inline
             onAdd={() => {}}
             editRun={run}
             onUpdate={(updated) => {

@@ -18,6 +18,7 @@ interface AddRunPageProps {
   editRun?: Run | null
   onUpdate?: (run: Run) => void
   onCancel?: () => void
+  inline?: boolean
 }
 
 function RatingButtons({
@@ -49,7 +50,7 @@ function RatingButtons({
   )
 }
 
-export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPageProps) {
+export function AddRunPage({ onAdd, editRun, onUpdate, onCancel, inline }: AddRunPageProps) {
   const navigate = useNavigate()
   const isEditing = Boolean(editRun)
 
@@ -106,11 +107,13 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
 
   return (
     <>
-      <PageHeader
-        back={handleBack}
-        title={isEditing ? 'Modifier la sortie' : 'Nouvelle sortie'}
-      />
-      <div className="px-4 pt-4 pb-6 max-w-lg mx-auto">
+      {!inline && (
+        <PageHeader
+          back={handleBack}
+          title={isEditing ? 'Modifier la sortie' : 'Nouvelle sortie'}
+        />
+      )}
+      <div className={inline ? '' : 'px-4 pt-4 pb-6 max-w-lg mx-auto'}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
           <Label>Date</Label>
