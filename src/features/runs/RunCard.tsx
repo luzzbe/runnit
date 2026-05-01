@@ -3,6 +3,7 @@ import { Pencil, Trash2, ChevronDown, ChevronUp, Wind, Zap, Map, Flag, ArrowLeft
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { AddRunPage } from './AddRunPage'
 import { formatPace, formatDuration } from '@/lib/stats/calculations'
 import { formatShortDate } from '@/lib/dates/utils'
@@ -50,6 +51,7 @@ interface RunCardProps {
 export function RunCard({ run, onUpdate, onDelete }: RunCardProps) {
   const [editing, setEditing] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
   if (editing) {
     return (
@@ -149,9 +151,7 @@ export function RunCard({ run, onUpdate, onDelete }: RunCardProps) {
               <Button
                 variant="destructive"
                 size="sm"
-                onClick={() => {
-                  if (confirm('Supprimer cette sortie ?')) onDelete(run.id)
-                }}
+                onClick={() => setConfirmDelete(true)}
                 className="flex-1"
               >
                 <Trash2 size={14} />
@@ -161,6 +161,14 @@ export function RunCard({ run, onUpdate, onDelete }: RunCardProps) {
           </div>
         )}
       </CardContent>
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Supprimer cette sortie ?"
+        description="Cette action est irréversible."
+        confirmLabel="Supprimer"
+        onConfirm={() => { setConfirmDelete(false); onDelete(run.id) }}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </Card>
   )
 }

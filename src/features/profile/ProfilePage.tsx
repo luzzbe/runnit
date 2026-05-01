@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { User, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { PageHeader } from '@/components/PageHeader'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
@@ -20,6 +21,7 @@ export function ProfilePage({ profile, onSave, onReset }: ProfilePageProps) {
   const [goal, setGoal] = useState<RunningGoal>(profile?.goal ?? 'run_5k')
   const [freq, setFreq] = useState(profile?.weeklyFrequency ?? 3)
   const [saved, setSaved] = useState(false)
+  const [confirmReset, setConfirmReset] = useState(false)
 
   function handleSave(e: React.FormEvent) {
     e.preventDefault()
@@ -113,9 +115,7 @@ export function ProfilePage({ profile, onSave, onReset }: ProfilePageProps) {
                 variant="destructive"
                 size="sm"
                 className="w-full"
-                onClick={() => {
-                  if (confirm('Supprimer toutes les données ?')) onReset()
-                }}
+                onClick={() => setConfirmReset(true)}
               >
                 <RotateCcw size={14} />
                 Tout supprimer
@@ -125,6 +125,14 @@ export function ProfilePage({ profile, onSave, onReset }: ProfilePageProps) {
         </div>
       </div>
       </div>
+      <ConfirmDialog
+        open={confirmReset}
+        title="Supprimer toutes les données ?"
+        description="Toutes tes sorties et ton profil seront effacés. Irréversible."
+        confirmLabel="Tout supprimer"
+        onConfirm={() => { setConfirmReset(false); onReset() }}
+        onCancel={() => setConfirmReset(false)}
+      />
     </>
   )
 }

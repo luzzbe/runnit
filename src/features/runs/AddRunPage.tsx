@@ -201,7 +201,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel, inline }: AddRu
           <RatingButtons
             value={feeling}
             onChange={setFeeling}
-            labels={['Super', 'Bien', 'Correct', 'Moyen', 'Difficile']}
+            labels={['Difficile', 'Moyen', 'Correct', 'Bien', 'Super']}
           />
         </div>
 
