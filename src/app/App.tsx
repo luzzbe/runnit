@@ -11,7 +11,6 @@ import { useProfile } from '@/hooks/useProfile'
 import { useRuns } from '@/hooks/useRuns'
 import { useStats } from '@/hooks/useStats'
 import { storage } from '@/lib/storage'
-import type { Run, UserProfile } from '@/types'
 
 export default function App() {
   const { profile, saveProfile } = useProfile()
@@ -27,16 +26,6 @@ export default function App() {
     window.location.hash = '#/'
     window.location.reload()
   }, [])
-
-  const handleLoadDemo = useCallback(
-    (demoProfile: UserProfile, demoRuns: Run[]) => {
-      storage.clearAll()
-      storage.saveProfile(demoProfile)
-      storage.saveRuns(demoRuns)
-      window.location.reload()
-    },
-    [],
-  )
 
   if (!profile) {
     return (
@@ -83,7 +72,6 @@ export default function App() {
               <ProfilePage
                 profile={profile}
                 onSave={saveProfile}
-                onLoadDemo={handleLoadDemo}
                 onReset={handleReset}
               />
             }

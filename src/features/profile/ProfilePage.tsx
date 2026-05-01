@@ -6,17 +6,15 @@ import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
-import { demoProfile, demoRuns } from '@/data/demo'
 import type { UserProfile, RunningLevel, RunningGoal } from '@/types'
 
 interface ProfilePageProps {
   profile: UserProfile | null
   onSave: (profile: UserProfile) => void
-  onLoadDemo: (profile: UserProfile, runs: import('@/types').Run[]) => void
   onReset: () => void
 }
 
-export function ProfilePage({ profile, onSave, onLoadDemo, onReset }: ProfilePageProps) {
+export function ProfilePage({ profile, onSave, onReset }: ProfilePageProps) {
   const [firstName, setFirstName] = useState(profile?.firstName ?? '')
   const [level, setLevel] = useState<RunningLevel>(profile?.level ?? 'beginner')
   const [goal, setGoal] = useState<RunningGoal>(profile?.goal ?? 'run_5k')
@@ -105,23 +103,6 @@ export function ProfilePage({ profile, onSave, onLoadDemo, onReset }: ProfilePag
           Données
         </h2>
         <div className="flex flex-col gap-3">
-          <Card>
-            <CardContent className="pt-4">
-              <p className="text-sm font-medium text-slate-700 mb-1">Données de démonstration</p>
-              <p className="text-xs text-slate-400 mb-3">
-                Charge un profil et 15 sorties exemples pour explorer l'app.
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
-                onClick={() => onLoadDemo(demoProfile, demoRuns)}
-              >
-                Charger les données démo
-              </Button>
-            </CardContent>
-          </Card>
-
           <Card>
             <CardContent className="pt-4">
               <p className="text-sm font-medium text-red-600 mb-1">Réinitialiser</p>
