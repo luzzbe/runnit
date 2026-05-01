@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import confetti from 'canvas-confetti'
 import { Activity } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/PageHeader'
@@ -93,6 +94,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
       onCancel?.()
     } else {
       onAdd(run)
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } })
       navigate('/')
     }
   }
@@ -139,6 +141,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
           <Input
             id="distance"
             type="number"
+            inputMode="decimal"
             min="0.1"
             max="200"
             step="0.1"
@@ -155,6 +158,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
             <div className="flex-1">
               <Input
                 type="number"
+                inputMode="numeric"
                 min="0"
                 max="23"
                 placeholder="0"
@@ -167,6 +171,7 @@ export function AddRunPage({ onAdd, editRun, onUpdate, onCancel }: AddRunPagePro
             <div className="flex-1">
               <Input
                 type="number"
+                inputMode="numeric"
                 min="0"
                 max="59"
                 placeholder="30"
